@@ -15,6 +15,11 @@ restarounts by allergins present in menu items.
 
 ### Min. Viable Product
 
+- Single Page
+- Users can input multiple allergins
+- Users can enter location by ZIP Code
+- 
+
 ### Post MVP Goals
 
 ## Dependencies
