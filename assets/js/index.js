@@ -1,0 +1,3 @@
+const Company = {
+  name: "AllergicToThat"
+};
