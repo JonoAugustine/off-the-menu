@@ -5,6 +5,12 @@ nav.navbar {
 
 div.tag-box {
   border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: row;
+}
+
+.tag {
+  margin: auto 5px;
 }
 
 .input {

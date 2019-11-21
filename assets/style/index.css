@@ -51,6 +51,7 @@ div.tag-box {
   min-width: 90%;
   padding: 0.7em 0.5em;
   border-radius: 0;
+  text-align: center;
 }
 
 @media only screen and (min-width: 450px) {

@@ -46,12 +46,45 @@ const jqe = (tag, callback) => {
 
 const Container = callback => jqe("div", callback).addClass("ui container");
 
-const Inputs = {
-  Text: callback => {
-    return jqe("input", callback)
+const Input = {
+  Text: name => {
+    return jqe("input")
+      .attr("name", name)
       .addClass("ui input")
       .attr("type", "text");
+  },
+  /**
+   * A Tag is a text-element which is removed on click.
+   * @param {string} text The text of the tag
+   * @param {function} callback Runs on click, before the tag is removed.
+   * @returns A new Tag element.
+   */
+  Tag: (text, callback) => {
+    return jqe("div")
+      .addClass("tag")
+      .text(text)
+      .click(tag => {
+        if (typeof callback === "function") callback(tag);
+        tag.target.remove();
+      });
   }
+};
+
+/**
+ * Creates a new Form element with the given `onSubmit` function.
+ * The `onSubmit` function receives an object of mapped values
+ * from
+ * @param {function} onSubmit
+ * @returns A new Form element.
+ */
+const Form = onSubmit => {
+  return jqe("form").on("submit", function(e) {
+    e.preventDefault();
+    const map = {};
+    const v = $(this).serializeArray();
+    v.forEach(i => (map[i.name] = i.value));
+    onSubmit(map);
+  });
 };
 
 const Navbar = () => {
@@ -74,9 +107,22 @@ const HomePage = () => {
     .addClass("centered")
     .css({ "margin-top": "1em" });
 
-  const allergenInput = Inputs.Text();
+  const allergenInput = Input.Text("allergen")
+    .attr("placeholder", "what's off the menu?")
+    .attr("id", "allergen-input");
   const tagBox = jqe("div").addClass("tag-box");
-  body.append(allergenInput, tagBox);
+
+  // ! testing
+  tagBox.append(Input.Tag("Religion"));
+
+  const allergenForm = Form(v => {
+    if (v.allergen > "") tagBox.append(Input.Tag(v.allergen));
+    allergenInput.val("");
+  });
+
+  allergenForm.append(allergenInput, tagBox);
+
+  body.append(allergenForm);
 
   wrapper.append(body);
 
