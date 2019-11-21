@@ -7,6 +7,8 @@ div.tag-box {
   border-bottom: 1px solid black;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .tag {
@@ -15,4 +17,7 @@ div.tag-box {
 
 .input {
   border: 1px solid black;
+}
+
+div.container.store-list {
 }

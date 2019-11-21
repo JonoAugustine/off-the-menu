@@ -47,9 +47,10 @@ const jqe = (tag, callback) => {
 const Container = callback => jqe("div", callback).addClass("ui container");
 
 const Input = {
-  Text: name => {
+  Text: (name, placeholder) => {
     return jqe("input")
       .attr("name", name)
+      .attr("placeholder", placeholder)
       .addClass("ui input")
       .attr("type", "text");
   },
@@ -98,31 +99,96 @@ const Navbar = () => {
   return base;
 };
 
+const StoreListing = store => {
+  const base = jqe("div").addClass("store-listing");
+
+  const nameDiv = jqe("div")
+    .addClass("listing-section")
+    .text(store.name);
+  const rateDiv = jqe("div")
+    .addClass("listing-section")
+    .text(store.rating);
+
+  const flagDiv = jqe("div")
+    .addClass("listing-section")
+    .text(
+      `
+  ${store.menu.items.length - store.menu.flaggedItems.length}/${
+        store.menu.items.length
+      }
+  `
+    );
+
+  base.append(nameDiv, rateDiv, flagDiv);
+
+  return base;
+};
+
+const StoreList = () => {
+  const base = Container().addClass("store-list");
+  // TODO
+  return base;
+};
+
 const HomePage = () => {
-  const wrapper = jqe("div");
+  const wrapper = jqe("div").css({ "min-height": "100%" });
 
   wrapper.append(Navbar);
 
   const body = Container()
     .addClass("centered")
-    .css({ "margin-top": "1em" });
+    .css({ "margin-top": "1em", "min-height": "100%" });
 
-  const allergenInput = Input.Text("allergen")
-    .attr("placeholder", "what's off the menu?")
-    .attr("id", "allergen-input");
+  const allergenInput = Input.Text("allergen", "what's off the menu?").attr(
+    "id",
+    "allergen-input"
+  );
   const tagBox = jqe("div").addClass("tag-box");
 
-  // ! testing
-  tagBox.append(Input.Tag("Religion"));
-
   const allergenForm = Form(v => {
-    if (v.allergen > "") tagBox.append(Input.Tag(v.allergen));
-    allergenInput.val("");
+    if (v.allergen > "") {
+      tagBox.append(Input.Tag(v.allergen));
+      allergenInput.val("");
+    }
   });
 
   allergenForm.append(allergenInput, tagBox);
 
-  body.append(allergenForm);
+  const zipCodeForm = Form(v => {
+    // v.zipcode;
+    // TODO invoke Search function
+  });
+
+  zipCodeForm.append(Input.Text("zipcode", "ZIP Code"));
+
+  body.append(allergenForm, zipCodeForm);
+
+  const listHeader = jqe("div")
+    .addClass("store-listing")
+    .css({ "border-bottom": "1px solid black", "max-height": "100%" });
+  listHeader.append(
+    jqe("div")
+      .text("Name")
+      .addClass("listing-section"),
+    jqe("div")
+      .text("Rating")
+      .addClass("listing-section"),
+    jqe("div")
+      .text("Safe/Total")
+      .addClass("listing-section")
+  );
+
+  const storeList = StoreList();
+  storeList.append(listHeader);
+  storeList.append(
+    StoreListing({
+      name: "STORE NAME McNAME NAME",
+      rating: "5",
+      menu: { items: [0, 1, 2, 3, 4], flaggedItems: [1, 3, 4] }
+    })
+  );
+
+  body.append(storeList);
 
   wrapper.append(body);
 

@@ -1,7 +1,8 @@
-/* TODO! Testing */
+/* TODO! Testing /
 div {
   border: 1px dotted purple;
 }
+*/
 
 * {
   font-family: "Quicksand", sans-serif;
@@ -44,6 +45,26 @@ div.tag-box {
   max-width: 150px;
   min-height: 25px;
   margin: 5px auto;
+}
+
+div.container.store-list {
+  min-height: 100%;
+  width: 50%;
+  margin: 1em auto;
+}
+
+div.store-listing {
+  height: 25px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+div.store-listing > .listing-section {
+  width: 33.33333% !important;
+  max-height: 20px;
+  display: inline-block;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 /**/
