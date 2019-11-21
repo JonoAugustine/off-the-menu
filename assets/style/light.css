@@ -19,5 +19,7 @@ div.tag-box {
   border: 1px solid black;
 }
 
-div.container.store-list {
+button {
+  border: 1px solid black;
+  padding: 0.5rem;
 }

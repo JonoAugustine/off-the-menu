@@ -3,9 +3,9 @@ div {
   border: 1px dotted purple;
 }
 */
-
 * {
   font-family: "Quicksand", sans-serif;
+  overflow: hidden;
 }
 
 html,
@@ -60,11 +60,9 @@ div.store-listing {
 }
 
 div.store-listing > .listing-section {
-  width: 33.33333% !important;
+  width: 25%;
   max-height: 20px;
   display: inline-block;
-  overflow-y: hidden;
-  overflow-x: auto;
 }
 
 /**/
@@ -73,10 +71,16 @@ div.store-listing > .listing-section {
   padding: 0.7em 0.5em;
   border-radius: 0;
   text-align: center;
+  background-color: transparent;
 }
 
 @media only screen and (min-width: 450px) {
   .input {
     min-width: 0 !important;
   }
+}
+
+button {
+  padding: 0.5rem;
+  background-color: transparent;
 }

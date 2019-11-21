@@ -104,6 +104,7 @@ const StoreListing = store => {
 
   const nameDiv = jqe("div")
     .addClass("listing-section")
+    .css({ width: "50%", float: "left" })
     .text(store.name);
   const rateDiv = jqe("div")
     .addClass("listing-section")
@@ -169,12 +170,13 @@ const HomePage = () => {
   listHeader.append(
     jqe("div")
       .text("Name")
-      .addClass("listing-section"),
+      .addClass("listing-section")
+      .css({ width: "50%", float: "left" }),
     jqe("div")
       .text("Rating")
       .addClass("listing-section"),
     jqe("div")
-      .text("Safe/Total")
+      .text("Safe/All")
       .addClass("listing-section")
   );
 
@@ -191,6 +193,13 @@ const HomePage = () => {
   body.append(storeList);
 
   wrapper.append(body);
+
+  // TODO! Test button
+  body.append(
+    jqe("button")
+      .click(() => theme.toggle())
+      .text("Toggle Theme Test")
+  );
 
   return wrapper;
 };
