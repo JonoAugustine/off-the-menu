@@ -1,0 +1,12 @@
+nav.navbar {
+  color: white;
+  background-color: #189ab4;
+}
+
+div.tag-box {
+  border-bottom: 1px solid black;
+}
+
+.input {
+  border: 1px solid black;
+}

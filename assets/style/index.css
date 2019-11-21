@@ -1,26 +1,60 @@
+/* TODO! Testing */
+div {
+  border: 1px dotted purple;
+}
+
+* {
+  font-family: "Quicksand", sans-serif;
+}
+
 html,
 body,
 #root {
+  margin: 0;
   height: 100% !important;
   max-width: 100% !important;
   width: 100% !important;
+  overflow: hidden;
 }
 
-.mat-input {
-  padding: 0.5em;
-  border-radius: 0;
-  border: 1px solid black;
-}
+/*
+ * NAV
+ */
 
 nav.navbar {
   padding: 0.5em;
   min-width: 100%;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  color: white;
-  background-color: #189ab4;
 }
 
 nav.navbar .brand {
   text-align: center;
+}
+
+/*
+ * Container
+ */
+
+.container.centered {
+  text-align: center;
+  align-content: center;
+}
+
+div.tag-box {
+  width: 50%;
+  max-width: 150px;
+  min-height: 25px;
+  margin: 5px auto;
+}
+
+/**/
+.input {
+  min-width: 90%;
+  padding: 0.7em 0.5em;
+  border-radius: 0;
+}
+
+@media only screen and (min-width: 450px) {
+  .input {
+    min-width: 0 !important;
+  }
 }
