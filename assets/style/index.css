@@ -24,3 +24,8 @@ nav.navbar {
 nav.navbar .brand {
   text-align: center;
 }
+
+#map{
+  height: 400px;
+  width: 100%;
+}
