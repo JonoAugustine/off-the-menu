@@ -30,8 +30,6 @@ const theme = {
   }
 };
 
-theme.toggle();
-
 /**
  * Simplified DOM Element creation. Same as `$("<div>")`
  * but does not need chevrons.
@@ -100,25 +98,22 @@ const Navbar = () => {
 };
 
 const StoreListing = store => {
+  const Section = text =>
+    jqe("div")
+      .addClass("listing-section")
+      .text(text);
+
   const base = jqe("div").addClass("store-listing");
 
-  const nameDiv = jqe("div")
-    .addClass("listing-section")
-    .css({ width: "50%", float: "left" })
-    .text(store.name);
-  const rateDiv = jqe("div")
-    .addClass("listing-section")
-    .text(store.rating);
+  const nameDiv = Section(store.name).css({ width: "50%" });
+  const rateDiv = Section(store.rating);
 
-  const flagDiv = jqe("div")
-    .addClass("listing-section")
-    .text(
-      `
-  ${store.menu.items.length - store.menu.flaggedItems.length}/${
-        store.menu.items.length
-      }
-  `
-    );
+  const flagDiv = Section(
+    store.menu.items.length -
+      store.menu.flaggedItems.length +
+      "/" +
+      store.menu.items.length
+  );
 
   base.append(nameDiv, rateDiv, flagDiv);
 
@@ -127,7 +122,20 @@ const StoreListing = store => {
 
 const StoreList = () => {
   const base = Container().addClass("store-list");
-  // TODO
+  const listHeader = jqe("div").addClass("store-listing list-header");
+  listHeader.append(
+    jqe("div")
+      .text("Name")
+      .addClass("listing-section")
+      .css({ width: "50%", float: "left" }),
+    jqe("div")
+      .text("Rating")
+      .addClass("listing-section"),
+    jqe("div")
+      .text("Safe/All")
+      .addClass("listing-section")
+  );
+  base.append(listHeader, jqe("hr"));
   return base;
 };
 
@@ -164,24 +172,8 @@ const HomePage = () => {
 
   body.append(allergenForm, zipCodeForm);
 
-  const listHeader = jqe("div")
-    .addClass("store-listing")
-    .css({ "border-bottom": "1px solid black", "max-height": "100%" });
-  listHeader.append(
-    jqe("div")
-      .text("Name")
-      .addClass("listing-section")
-      .css({ width: "50%", float: "left" }),
-    jqe("div")
-      .text("Rating")
-      .addClass("listing-section"),
-    jqe("div")
-      .text("Safe/All")
-      .addClass("listing-section")
-  );
-
   const storeList = StoreList();
-  storeList.append(listHeader);
+
   storeList.append(
     StoreListing({
       name: "STORE NAME McNAME NAME",
