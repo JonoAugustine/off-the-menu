@@ -25,17 +25,28 @@ body,
 nav.navbar {
   padding: 0.5em;
   min-width: 100%;
+  position: relative;
 }
 
-nav.navbar .brand {
+nav.navbar h2.brand {
   text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+nav.navbar i.icon.mode-toggler {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  height: 100%;
+  cursor: pointer;
 }
 
 /*
  * Container
  */
 
-.container.centered {
+div.container.centered {
   text-align: center;
   align-content: center;
 }

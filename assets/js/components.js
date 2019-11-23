@@ -1,11 +1,13 @@
 const theme = {
   light: {
     location: "./assets/style/light.css",
-    primary: "#f9f9f9"
+    primary: "#f9f9f9",
+    togglerIcon: "moon"
   },
   dark: {
     location: "./assets/style/dark.css",
-    primary: "#1f1f1f"
+    primary: "#1f1f1f",
+    togglerIcon: "sun"
   },
   link: function() {
     return $("#theme-link");
@@ -27,6 +29,13 @@ const theme = {
       : this.light.location;
     this.link().attr("href", nTheme);
     localStorage["theme"] = nTheme.location;
+  },
+  current: function() {
+    return this.link()
+      .attr("href")
+      .includes("dark")
+      ? this.dark
+      : this.light;
   }
 };
 
@@ -70,6 +79,12 @@ const Input = {
 };
 
 /**
+ * Return a Fomantic (FA) icon element.
+ * @param {string} name Icon name
+ */
+const Icon = name => jqe("i").addClass(`icon ${name}`);
+
+/**
  * Creates a new Form element with the given `onSubmit` function.
  * The `onSubmit` function receives an object of mapped values
  * from
@@ -86,6 +101,16 @@ const Form = onSubmit => {
   });
 };
 
+const ThemeToggler = current => {
+  const icon = Icon(theme.current().togglerIcon).addClass("mode-toggler");
+  icon.click(e => {
+    $(e.target).removeClass(theme.current().togglerIcon);
+    theme.toggle();
+    $(e.target).addClass(theme.current().togglerIcon);
+  });
+  return icon;
+};
+
 const Navbar = () => {
   const base = jqe("nav").addClass("navbar");
   const inner = Container();
@@ -94,48 +119,7 @@ const Navbar = () => {
     .text(ProjectInfo.name)
     .addClass("brand");
   inner.append(brand);
-  return base;
-};
-
-const StoreListing = store => {
-  const Section = text =>
-    jqe("div")
-      .addClass("listing-section")
-      .text(text);
-
-  const base = jqe("div").addClass("store-listing");
-
-  const nameDiv = Section(store.name).css({ width: "50%" });
-  const rateDiv = Section(store.rating);
-
-  const flagDiv = Section(
-    store.menu.items.length -
-      store.menu.flaggedItems.length +
-      "/" +
-      store.menu.items.length
-  );
-
-  base.append(nameDiv, rateDiv, flagDiv);
-
-  return base;
-};
-
-const StoreList = () => {
-  const base = Container().addClass("store-list");
-  const listHeader = jqe("div").addClass("store-listing list-header");
-  listHeader.append(
-    jqe("div")
-      .text("Name")
-      .addClass("listing-section")
-      .css({ width: "50%", float: "left" }),
-    jqe("div")
-      .text("Rating")
-      .addClass("listing-section"),
-    jqe("div")
-      .text("Safe/All")
-      .addClass("listing-section")
-  );
-  base.append(listHeader, jqe("hr"));
+  inner.append(ThemeToggler());
   return base;
 };
 
@@ -163,35 +147,9 @@ const HomePage = () => {
 
   allergenForm.append(allergenInput, tagBox);
 
-  const zipCodeForm = Form(v => {
-    // v.zipcode;
-    // TODO invoke Search function
-  });
-
-  zipCodeForm.append(Input.Text("zipcode", "ZIP Code"));
-
-  body.append(allergenForm, zipCodeForm);
-
-  const storeList = StoreList();
-
-  storeList.append(
-    StoreListing({
-      name: "STORE NAME McNAME NAME",
-      rating: "5",
-      menu: { items: [0, 1, 2, 3, 4], flaggedItems: [1, 3, 4] }
-    })
-  );
-
-  body.append(storeList);
+  body.append(allergenForm);
 
   wrapper.append(body);
-
-  // TODO! Test button
-  body.append(
-    jqe("button")
-      .click(() => theme.toggle())
-      .text("Toggle Theme Test")
-  );
 
   return wrapper;
 };
@@ -204,10 +162,11 @@ const root = () => $("#root");
  * @param {*} component
  * @returns The root element with given child appended.
  */
-const render = component =>
-  root()
+const render = component => {
+  return root()
     .empty()
-    .append(component);
+    .append(component());
+};
 
 /***********************
  **********************/
@@ -219,5 +178,5 @@ $(document).ready(() => {
 
   theme.load();
 
-  render(HomePage());
+  render(HomePage);
 });
