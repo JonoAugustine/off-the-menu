@@ -18,15 +18,15 @@ function initMap(position) {
     console.log(position.coords);
 //   var sydney = new google.maps.LatLng(-33.867, 151.195);
     
-var sydney = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+var userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
   infowindow = new google.maps.InfoWindow();
 
   map = new google.maps.Map(
-      document.getElementById('map'), {center: sydney, zoom: 15});
+      document.getElementById('map'), {center: userLocation, zoom: 15});
 
   var request = {
     query: 'Starbucks',
-    fields: ['name', 'geometry'],
+    fields: ['name', 'geometry']
   };
 
   var service = new google.maps.places.PlacesService(map);
@@ -43,7 +43,7 @@ var sydney = new google.maps.LatLng(position.coords.latitude, position.coords.lo
 
 
 
-function createMarker(place){
+function createMarker(place){``
     var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
         map: map,
