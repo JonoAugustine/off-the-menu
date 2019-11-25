@@ -96,8 +96,8 @@ button {
   background-color: transparent;
 }
 
-#map{
-  height: 400px;
-  width: 30%;
+.map-wrapper {
+  height: 50vh;
+  width: 100%;
   text-align: center;
 }

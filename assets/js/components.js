@@ -125,6 +125,22 @@ const Navbar = () => {
   return base;
 };
 
+const GoogleMap = () => {
+  const base = jqe("div")
+    .attr("id", "map")
+    .addClass("map-wrapper");
+
+  const script = jqe("script")
+    .attr("async", true)
+    .attr("defer", true)
+    .attr("type", "text/javascript")
+    .attr("src", MapsApi.getImportUri());
+
+  base.append(script);
+
+  return base;
+};
+
 const HomePage = () => {
   const wrapper = jqe("div").css({ "min-height": "100%" });
 
@@ -153,6 +169,8 @@ const HomePage = () => {
   allergenForm.append(allergenInput, tagBox);
 
   body.append(allergenForm);
+
+  body.append(GoogleMap());
 
   wrapper.append(body);
 
