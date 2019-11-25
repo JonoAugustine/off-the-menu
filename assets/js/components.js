@@ -84,6 +84,8 @@ const Input = {
  */
 const Icon = name => jqe("i").addClass(`icon ${name}`);
 
+const ToolTip = (element, text) => element.attr("data-tooltip", text);
+
 /**
  * Creates a new Form element with the given `onSubmit` function.
  * The `onSubmit` function receives an object of mapped values
@@ -101,7 +103,7 @@ const Form = onSubmit => {
   });
 };
 
-const ThemeToggler = current => {
+const ThemeToggler = () => {
   const icon = Icon(theme.current().togglerIcon).addClass("mode-toggler");
   icon.click(e => {
     $(e.target).removeClass(theme.current().togglerIcon);
@@ -136,6 +138,9 @@ const HomePage = () => {
     "id",
     "allergen-input"
   );
+
+  ToolTip(allergenInput, "Enter Allergens Here");
+
   const tagBox = jqe("div").addClass("tag-box");
 
   const allergenForm = Form(v => {

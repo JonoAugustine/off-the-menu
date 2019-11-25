@@ -23,8 +23,13 @@
     <link id="theme-link" rel="stylesheet" href="assets/style/light.css" />
   </head>
   <body>
+    <h1></h1>
     <div id="root"></div>
-
+    <div id ="map"></div>
+    <!-- Import GoogleMaps & Places API-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTUYF2-gvm3-YyMhkJ1iSkhs-Ir4ciCAI&callback=initMap&libraries=places"
+    type="text/javascript"></script>
+    <script src="./assets/js/api.js"></script>
     <!-- Import JQuery -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -37,5 +42,7 @@
     <script src="./assets/js/index.js"></script>
     <script src="./assets/js/api.js"></script>
     <script src="./assets/js/components.js"></script>
+    <script src="./assets/js/extensions.js"></script>
+    <!-- <script src="./assets/js/components.js"></script> -->
   </body>
 </html>
