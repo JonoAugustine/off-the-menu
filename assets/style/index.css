@@ -1,8 +1,8 @@
-/* TODO! Testing /
+/* TODO! Testing */
 div {
   border: 1px dotted purple;
 }
-*/
+
 * {
   font-family: "Quicksand", sans-serif;
   overflow: hidden;
@@ -49,6 +49,11 @@ nav.navbar i.icon.mode-toggler {
 div.container.centered {
   text-align: center;
   align-content: center;
+}
+
+div.container.middle {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 div.tag-box {

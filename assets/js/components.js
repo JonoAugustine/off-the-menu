@@ -128,8 +128,9 @@ const HomePage = () => {
 
   wrapper.append(Navbar);
 
-  const body = Container()
-    .addClass("centered")
+  const pageBody = Container()
+    .attr("id", "body-container")
+    .addClass("centered middle")
     .css({ "margin-top": "1em", "min-height": "100%" });
 
   const allergenInput = Input.Text("allergen", "what's off the menu?").attr(
@@ -147,9 +148,9 @@ const HomePage = () => {
 
   allergenForm.append(allergenInput, tagBox);
 
-  body.append(allergenForm);
+  pageBody.append(allergenForm);
 
-  wrapper.append(body);
+  wrapper.append(pageBody);
 
   return wrapper;
 };
