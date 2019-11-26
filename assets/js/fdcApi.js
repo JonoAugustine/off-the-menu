@@ -18,8 +18,8 @@ const FdcSpec = {
     this.responseCount = raw.totalHits;
     this.results = filtered
       ? raw.foods
-          .filter(fd => fd.description.toLowerCase().includes(store))
-          .map(fd => ({ ...fd, description: fd.description.toLowerCase() }))
+          .filter(fd => fd.description.toLowerCase().includes(store)) // TODO Should we filter?
+          .map(fd => ({ ...fd, description: fd.description.toLowerCase() })) // TODO Sort by the number of keyword matches
       : raw.foods;
     this.request = raw.foodSearchCriteria;
     this.pagination = {
