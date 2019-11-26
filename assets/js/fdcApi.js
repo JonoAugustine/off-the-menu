@@ -23,7 +23,7 @@ const FdcSpec = {
       : raw.foods;
     this.request = raw.foodSearchCriteria;
     this.pagination = {
-      current: raw.page,
+      current: raw.currentPage,
       total: raw.totalPages
     };
   },
