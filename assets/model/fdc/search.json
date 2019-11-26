@@ -1,0 +1,30 @@
+{
+  "foodSearchCriteria": {
+    "generalSearchInput": "Wendy's spicy chicken sandwich",
+    "pageNumber": 1,
+    "requireAllWords": false
+  },
+  "totalHits": 15718,
+  "currentPage": 1,
+  "totalPages": 315,
+  "foods": [
+    {
+      "fdcId": 170723,
+      "description": "WENDY'S, Homestyle Chicken Fillet Sandwich",
+      "dataType": "SR Legacy",
+      "ndbNumber": "21244",
+      "publishedDate": "2019-04-01",
+      "allHighlightFields": "",
+      "score": 855.1462
+    },
+    {
+      "fdcId": 170724,
+      "description": "WENDY'S, Ultimate Chicken Grill Sandwich",
+      "dataType": "SR Legacy",
+      "ndbNumber": "21245",
+      "publishedDate": "2019-04-01",
+      "allHighlightFields": "",
+      "score": 855.1462
+    }
+  ]
+}

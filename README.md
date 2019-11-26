@@ -21,6 +21,11 @@ restarounts by allergins present in menu items.
 
 ### Post MVP Goals
 
+- Move FDC API calls to a server of our design to better protect the API key.
+  - This would also make caching results simpler since a central (well... itermediate kinda)
+    db would allow for repeated searches to be better handled
+    (e.g., popular food spots will have faster response times)
+
 ## Dependencies
 
 Library:
