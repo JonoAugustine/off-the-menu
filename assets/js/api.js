@@ -16,13 +16,14 @@ var infowindow;
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(function(position) {
     MapsApi.geolocation = position;
-    initMap()
+    initMap();
   });
 }
 
 function initMap() {
+  if (MapsApi.geolocation === null) return;
   console.log(MapsApi.geolocation.coords);
-  //   var sydney = new google.maps.LatLng(-33.867, 151.195);
+  //const sydney = new google.maps.LatLng(-33.867, 151.195);
 
   var userLocation = new google.maps.LatLng(
     MapsApi.geolocation.coords.latitude,
