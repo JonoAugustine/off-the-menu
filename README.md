@@ -1,4 +1,4 @@
-# placeholder-project
+# AllergicToThat
 
 Jennifer Genes, Michael Artes, Jonathan Augustine
 
@@ -16,17 +16,30 @@ restarounts by allergins present in menu items.
 ### Min. Viable Product
 
 - Single Page
-- Users can input multiple allergins
-- Users can enter location by ZIP Code
-- 
+- User can input multiple allergins
+- User can enter location by ZIP Code
+
+- Show whether item has ingredients label or not
 
 ### Post MVP Goals
 
+- NLP for associating known allergens with associated chemicals and ingredients.
+
+## Log
+
 ## Dependencies
+
+Library:
+
+- [JQuery](https://code.jquery.com/)
+
+Style:
+
+- [Fomantic UI](https://fomantic-ui.com/)
 
 API:
 
-- [FCD FoodData Central](https://fdc.nal.usda.gov/index.html)
+- [FDC FoodData Central](https://fdc.nal.usda.gov/index.html)
 - [Google Maps API](https://developers.google.com/maps/documentation)
 
 ## License

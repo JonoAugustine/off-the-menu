@@ -1,0 +1,33 @@
+html,
+body,
+#root {
+  color: white;
+  background-color: #292930;
+}
+
+nav.navbar {
+  color: white;
+  background-color: #002d52;
+}
+
+div.tag-box {
+  border-bottom: 1px solid slategray;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.tag {
+  margin: auto 5px;
+}
+
+input.input {
+  color: white !important;
+  border: 1px solid white;
+}
+
+button {
+  color: white !important;
+  border: 1px solid white;
+}
