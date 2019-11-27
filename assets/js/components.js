@@ -28,7 +28,7 @@ const theme = {
       ? this.dark.location
       : this.light.location;
     this.link().attr("href", nTheme);
-    localStorage["theme"] = nTheme.location;
+    localStorage["theme"] = nTheme;
   },
   current: function() {
     return this.link()
@@ -67,6 +67,12 @@ const jqe = (tag, callback) => {
   return e;
 };
 
+const Button = (text, click) => {
+  const b = jqe("button").text(text);
+  if (typeof click === "function") b.click(click);
+  return b;
+};
+
 const Container = callback => jqe("div", callback).addClass("ui container");
 
 const Input = {
@@ -98,6 +104,17 @@ const Input = {
    */
   AllergenTag: text => {
     return Input.Tag(text, e => user.removeAllergen(e.text().toLowerCase()));
+  },
+  /**
+   * @param {function} click receives the text input element.
+   */
+  TextLabeledButton: (labelText, placeholder, click) => {
+    const w = jqe("div").addClass("ui action input");
+    const i = jqe("input")
+      .attr("type", labelText)
+      .attr("placeholder", placeholder);
+    const b = Button(labelText, () => click(i));
+    return w.append(i, b);
   }
 };
 
@@ -109,7 +126,7 @@ const Icon = name => jqe("i").addClass(`icon ${name}`);
 
 const StepWrapper = (ordered, ...steps) => {
   return jqe("div")
-    .addClass(`ui steps ${ordered === false ? "" : "ordered"}`)
+    .addClass(`ui steps three ${ordered === false ? "" : "ordered"}`)
     .append(...steps);
 };
 
@@ -174,7 +191,7 @@ const Navbar = () => {
  * @param {string} name The name of the page.
  * @param {function} init a function passed 1 argument, the page Container.
  */
-const Page = (name, init) => {
+const Page = (name, step, init) => {
   if (typeof init !== "function") {
     throw new Error("Page init must be a function");
   } else if (typeof name !== "string") {
@@ -190,29 +207,52 @@ const Page = (name, init) => {
     .attr("id", "body-container")
     .addClass("centered middle")
     .css({ "margin-top": "1em", "min-height": "100%" });
+
+  // Add steps to content container
+  const stepWrapper = StepWrapper(
+    false,
+    Step(
+      "store",
+      "Choose a Restaurant",
+      "Click on the map below to select a place to eat"
+    ).addClass(`${step === 0 ? "" : "not-"}active`),
+    Step(
+      "skull crossbones",
+      "Tell  us what you can’t eat",
+      "Enter your allergens below"
+    ).addClass(`${step === 1 ? "" : "not-"}active`),
+    Step(
+      "search",
+      "Enter Items from the Menu",
+      "Enter an item from the menu and check below to see the ingredients"
+    ).addClass(`${step === 2 ? "" : "not-"}active`)
+  );
+
+  _pageBody.append(stepWrapper);
+
   // Run init on content container
   init(_pageBody);
+
   // Add page container to paeg wrapper
   _page.append(Navbar(), _pageBody);
   // return page content container
   return _page;
 };
 
-const HomePage = Page("home", p => {
-  const stepWrapper = StepWrapper(
-    true,
-    Step(
-      null,
-      "Choose a Restaurant",
-      "Click on the map below to select a place to eat"
-    ).addClass("active"),
-    Step(null, "Tell  us what you can’t eat", "Enter your allergens below")
+const HomePage = Page("home", 0, p => {
+  // TODO! Get rid of this when we can use MAPs events
+  const storeInput = Input.TextLabeledButton(
+    "NEXT",
+    "Where do you want to eat?",
+    input => {
+      user.store = input.val();
+      render(AllergensPage);
+    }
   );
-
-  p.append(stepWrapper);
+  p.append(storeInput);
 });
 
-const AllergensPage = Page("allergens", p => {
+const AllergensPage = Page("allergens", 1, p => {
   const allergenInput = Input.Text("allergen", "what's off the menu?").attr(
     "id",
     "allergen-input"

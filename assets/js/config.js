@@ -1,6 +1,7 @@
 /** Session class used to hold session data. */
 class SessionInfo {
   allergens = [];
+  store = null;
   geolocation = null;
   page = null;
 
