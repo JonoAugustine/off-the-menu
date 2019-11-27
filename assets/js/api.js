@@ -2,60 +2,50 @@
 $(document).ready(function(){
 
 
-  var map;
-  var service;
-  var infowindow;
-  var userQuery ='';
 
-
-
-
-  //check if geolocation is available
+//   //check if geolocation is available
   if (navigator.geolocation) { 
     navigator.geolocation.getCurrentPosition(function(position){
       //Retrieve position properties
       initMap(position);
       //Retrieve lat & long
       console.log(position);
-    });   
+      });   
   }
 
 
+  var map;
+  var service;
+  var infowindow;
+  
   function initMap(position) {
-    console.log(position.coords);
-    //   var sydney = new google.maps.LatLng(-33.867, 151.195);
     var userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    infowindow = new google.maps.InfoWindow();
-
-    map = new google.maps.Map(
-      document.getElementById('map'), {center: userLocation, zoom: 15});
-
+  
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: userLocation,
+        zoom: 15
+      });
+    var marker = new google.maps.Marker({
+      position: userLocation,
+      map: map,
+    });
     var request = {
-      query: 'Starbucks',
-      fields: ['name', 'geometry']
+      position: location,
+      radius: '5000',
+      type: ['Starbucks']
     };
-
-    var service = new google.maps.places.PlacesService(map);
-
-    service.findPlaceFromQuery(request, function(results, status) {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
+  
+    service = new google.maps.places.PlacesService(map);
+    service.nearbySearch(request, callback);
+  }
+  
+  function callback(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < results.length; i++) {
+        var place = results[i];
         createMarker(results[i]);
       }
-      map.setCenter(results[0].geometry.location);
-      }
-    });
-  }
-
-
-  function createMarker(place){``
-    var placeLoc = place.geometry.location;
-    var marker = new google.maps.Marker({
-      map: map,
-      position: place.geometry.location
-      //Change marker icon
-      // icon:'';
-    });
+    }
   }
 
 })
