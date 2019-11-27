@@ -1,3 +1,0 @@
-const ProjectInfo = {
-  name: "AllergicToThat"
-};

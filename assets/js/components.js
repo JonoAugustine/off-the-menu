@@ -72,7 +72,7 @@ const Input = {
       .addClass("tag")
       .text(text)
       .click(tag => {
-        if (typeof callback === "function") callback(tag);
+        if (typeof callback === "function") callback($(tag.target));
         tag.target.remove();
       });
   }
@@ -140,8 +140,15 @@ const HomePage = () => {
   const tagBox = jqe("div").addClass("tag-box");
 
   const allergenForm = Form(v => {
-    if (v.allergen > "") {
-      tagBox.append(Input.Tag(v.allergen));
+    if (v.allergen > "" && !User.allergens.includes(v.allergen.toLowerCase())) {
+      tagBox.append(
+        Input.Tag(v.allergen.toLowerCase(), e => {
+          User.allergens = User.allergens.filter(
+            a => a.toLowerCase() !== e.text().toLowerCase()
+          );
+        })
+      );
+      User.allergens.push(v.allergen.toLowerCase());
       allergenInput.val("");
     }
   });
