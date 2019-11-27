@@ -39,6 +39,23 @@ const theme = {
   }
 };
 
+/** Root div to manipulate. */
+const root = () => $("#root");
+
+/**
+ * Empties root element and appends child element.
+ * @param {*} component child DOM element
+ * @returns The root element with given child appended.
+ */
+const render = component => {
+  const name = component.attr("page-name");
+  if (name !== null) {
+  }
+  return root()
+    .empty()
+    .append(component);
+};
+
 /**
  * Simplified DOM Element creation. Same as `$("<div>")`
  * but does not need chevrons.
@@ -85,10 +102,23 @@ const Input = {
 const Icon = name => jqe("i").addClass(`icon ${name}`);
 
 const StepWrapper = ordered => {
-  return jqe("div").addClass(`ui steps ${ordered ? "ordered" : ""}`);
+  return jqe("div").addClass(`ui steps ${ordered === false ? "" : "ordered"}`);
 };
 
-const Step = (icon, title, description) => jqe("div").addClass("ui step");
+const Step = (icon, title, description) => {
+  const w = jqe("div").addClass("ui step");
+  w.append(Icon(icon));
+  w.append(
+    jqe("div")
+      .addClass("title")
+      .text(title)
+  );
+  w.append(
+    jqe("div")
+      .addClass("description")
+      .text(description)
+  );
+};
 
 /**
  * Creates a new Form element with the given `onSubmit` function.
@@ -129,22 +159,43 @@ const Navbar = () => {
   return base;
 };
 
-const HomePage = () => {
-  const wrapper = jqe("div").css({ "min-height": "100%" });
+/**
+ * @param {string} name The name of the page.
+ * @param {function} init a function passed 1 argument, the page Container.
+ */
+const Page = (name, init) => {
+  if (typeof init !== "function") {
+    throw new Error("Page init must be a function");
+  } else if (typeof name !== "string") {
+    throw new Error("Page must have name");
+  }
+  // Create page wrapper
+  const _page = jqe("div")
+    .addClass("page")
+    .attr("page-name", name);
 
-  wrapper.append(Navbar);
-
-  const pageBody = Container()
+  // Create content container
+  const _pageBody = Container()
     .attr("id", "body-container")
     .addClass("centered middle")
     .css({ "margin-top": "1em", "min-height": "100%" });
+  // Run init on content container
+  init(_pageBody);
+  // Add page container to paeg wrapper
+  _page.append(Navbar(), _pageBody);
+  // return page content container
+  return _pageBody;
+};
 
+const HomePage = Page("home", p => {
   const allergenInput = Input.Text("allergen", "what's off the menu?").attr(
     "id",
     "allergen-input"
   );
   const tagBox = jqe("div").addClass("tag-box");
+  // Add existing allergens to tagBox
 
+  /** Form for adding allergens to the session and to the tag-box */
   const allergenForm = Form(v => {
     if (v.allergen > "" && !User.allergens.includes(v.allergen.toLowerCase())) {
       tagBox.append(
@@ -161,36 +212,5 @@ const HomePage = () => {
 
   allergenForm.append(allergenInput, tagBox);
 
-  pageBody.append(allergenForm);
-
-  wrapper.append(pageBody);
-
-  return wrapper;
-};
-
-/** Root div to manipulate. */
-const root = () => $("#root");
-
-/**
- * Empties root element and appends child element.
- * @param {*} component
- * @returns The root element with given child appended.
- */
-const render = component => {
-  return root()
-    .empty()
-    .append(component());
-};
-
-/***********************
- **********************/
-
-let currentPage = null;
-
-$(document).ready(() => {
-  currentPage = "home";
-
-  theme.load();
-
-  render(HomePage);
+  p.append(allergenForm);
 });
