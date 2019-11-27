@@ -5,6 +5,7 @@ div {
 */
 * {
   font-family: "Quicksand", sans-serif;
+  border-radius: 0 !important;
 }
 
 html,
@@ -81,17 +82,21 @@ div.store-listing > .listing-section {
 }
 
 /**/
-.input {
-  min-width: 90%;
+input,
+div.input > input {
   padding: 0.7em 0.5em;
   border-radius: 0;
   text-align: center;
   background-color: transparent;
 }
 
+div.input {
+  min-width: 100%;
+}
+
 @media only screen and (min-width: 450px) {
-  .input {
-    min-width: 0 !important;
+  div.input {
+    min-width: 45% !important;
   }
 }
 
@@ -103,4 +108,10 @@ button {
 .ui.steps,
 .ui.steps * {
   text-align: left;
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.steps .ui.step.not-active {
+    display: none;
+  }
 }

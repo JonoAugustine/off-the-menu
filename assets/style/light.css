@@ -15,11 +15,15 @@ div.tag-box {
   margin: auto 5px;
 }
 
-.input {
-  border: 1px solid black;
+input {
+  border: 1px solid black !important;
 }
 
-button {
+div.input > input {
+  border-right: none !important;
+}
+
+div.input > button {
   border: 1px solid black;
   padding: 0.5rem;
 }
