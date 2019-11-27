@@ -84,6 +84,12 @@ const Input = {
  */
 const Icon = name => jqe("i").addClass(`icon ${name}`);
 
+const StepWrapper = ordered => {
+  return jqe("div").addClass(`ui steps ${ordered ? "ordered" : ""}`);
+};
+
+const Step = (icon, title, description) => jqe("div").addClass("ui step");
+
 /**
  * Creates a new Form element with the given `onSubmit` function.
  * The `onSubmit` function receives an object of mapped values
