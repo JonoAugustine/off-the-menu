@@ -44,5 +44,6 @@ const loadSession = () => {
 const user = loadSession();
 
 const ProjectInfo = {
-  name: "AllergicToThat"
+  name: "AllergicToThat",
+  srcUri: "https://github.com/JonoAugustine/AllergicToThat"
 };

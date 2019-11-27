@@ -74,6 +74,12 @@ const Button = (text, click) => {
 };
 
 const Container = callback => jqe("div", callback).addClass("ui container");
+const Grid = callback => Container().addClass("stackable grid");
+/**
+ *
+ * @param {string} width
+ */
+const Column = width => jqe("div").addClass(`column ${width} wide`);
 
 const Input = {
   Text: (name, placeholder) => {
@@ -187,6 +193,30 @@ const Navbar = () => {
   return base;
 };
 
+const Footer = step => {
+  const base = jqe("footer").addClass("footer");
+  const cont = Container();
+  const grid = Grid();
+  cont.append(grid);
+  const btnCol = Column("eight");
+  grid.append(btnCol);
+
+  if (step > 0) {
+    btnCol.append(Button("Chnage Restaurant", () => render(HomePage())));
+  }
+  if (step > 1) {
+    btnCol.append(Button("Change Allergens", () => render(AllergensPage())));
+  }
+
+  const brand = jqe("h4")
+    .text("AllergicToThat")
+    .click(() => window.open(ProjectInfo.srcUri, "_blank"));
+
+  grid.append(Column("eight").append(brand));
+
+  return base.append(cont);
+};
+
 /**
  * @param {string} name The name of the page.
  * @param {function} init a function passed 1 argument, the page Container.
@@ -226,7 +256,7 @@ const Page = (name, step, init) => {
       "Enter Items from the Menu",
       "Enter an item from the menu and check below to see the ingredients"
     ).addClass(`${step === 2 ? "" : "not-"}active`)
-  );
+  ).css({ "margin-bottom": "2em" });
 
   _pageBody.append(stepWrapper);
 
@@ -234,51 +264,53 @@ const Page = (name, step, init) => {
   init(_pageBody);
 
   // Add page container to paeg wrapper
-  _page.append(Navbar(), _pageBody);
+  _page.append(Navbar(), _pageBody, Footer(step));
   // return page content container
   return _page;
 };
 
-const HomePage = Page("home", 0, p => {
-  // TODO! Get rid of this when we can use MAPs events
-  const storeInput = Input.TextLabeledButton(
-    "NEXT",
-    "Where do you want to eat?",
-    input => {
-      if (input.val().length > 1) {
-        user.store = input.val();
-        render(AllergensPage);
+const HomePage = () =>
+  Page("home", 0, p => {
+    // TODO! Get rid of this when we can use MAPs events
+    const storeInput = Input.TextLabeledButton(
+      "NEXT",
+      "Where do you want to eat?",
+      input => {
+        console.log(input.val());
+        if (input.val().length > 1) {
+          user.store = input.val();
+          render(AllergensPage());
+        }
       }
-    }
-  );
-  p.append(storeInput);
-});
-
-const AllergensPage = Page("allergens", 1, p => {
-  const allergenInput = Input.TextLabeledButton(
-    "Add Allergen",
-    "what's off the menu?",
-    i => {
-      if (i.val() > "" && !user.allergens.includes(i.val().toLowerCase())) {
-        tagBox.append(Input.AllergenTag(i.val()));
-        user.addAllergen(i.val().toLowerCase());
-        i.val("");
-      }
-    }
-  ).css({ "margin-top": "3em" });
-  const tagBox = jqe("div")
-    .addClass("tag-box")
-    .css({ "margin-top": "2em" });
-  // Add existing allergens to tagBox
-  user.allergens.forEach(a => tagBox.append(Input.AllergenTag(a)));
-
-  const nextBtn = Button("Done", () => render(ItemSearchPage)).css({
-    "margin-top": "1em",
-    width: "100%",
-    "max-width": "200px"
+    );
+    p.append(storeInput);
   });
 
-  p.append(allergenInput, tagBox, nextBtn);
-});
+const AllergensPage = () =>
+  Page("allergens", 1, p => {
+    const allergenInput = Input.TextLabeledButton(
+      "Add Allergen",
+      "what's off the menu?",
+      i => {
+        if (i.val() > "" && !user.allergens.includes(i.val().toLowerCase())) {
+          tagBox.append(Input.AllergenTag(i.val()));
+          user.addAllergen(i.val().toLowerCase());
+          i.val("");
+        }
+      }
+    ).css({ "margin-top": "3em" });
+    const tagBox = jqe("div").addClass("tag-box");
 
-const ItemSearchPage = Page("item-search", 2, p => {});
+    // Add existing allergens to tagBox
+    user.allergens.forEach(a => tagBox.append(Input.AllergenTag(a)));
+
+    const nextBtn = Button("Done", () => render(ItemSearchPage())).css({
+      "margin-top": "1em",
+      width: "100%",
+      "max-width": "200px"
+    });
+
+    p.append(allergenInput, tagBox, nextBtn);
+  });
+
+const ItemSearchPage = () => Page("item-search", 2, p => {});
