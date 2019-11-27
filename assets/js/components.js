@@ -245,8 +245,10 @@ const HomePage = Page("home", 0, p => {
     "NEXT",
     "Where do you want to eat?",
     input => {
-      user.store = input.val();
-      render(AllergensPage);
+      if (input.val().length > 1) {
+        user.store = input.val();
+        render(AllergensPage);
+      }
     }
   );
   p.append(storeInput);
