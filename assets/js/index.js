@@ -6,6 +6,7 @@ $(document).ready(() => {
       render(HomePage);
       break;
     case "allergens":
+      render(AllergensPage);
       break;
     case "search":
       break;

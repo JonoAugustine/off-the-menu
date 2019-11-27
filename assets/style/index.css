@@ -1,11 +1,10 @@
-/* TODO! Testing */
+/* TODO! Testing /
 div {
   border: 1px dotted purple;
 }
-
+*/
 * {
   font-family: "Quicksand", sans-serif;
-  overflow: hidden;
 }
 
 html,
@@ -99,4 +98,9 @@ div.store-listing > .listing-section {
 button {
   padding: 0.5rem;
   background-color: transparent;
+}
+
+.ui.steps,
+.ui.steps * {
+  text-align: left;
 }

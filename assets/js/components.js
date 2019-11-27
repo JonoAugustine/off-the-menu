@@ -107,23 +107,28 @@ const Input = {
  */
 const Icon = name => jqe("i").addClass(`icon ${name}`);
 
-const StepWrapper = ordered => {
-  return jqe("div").addClass(`ui steps ${ordered === false ? "" : "ordered"}`);
+const StepWrapper = (ordered, ...steps) => {
+  return jqe("div")
+    .addClass(`ui steps ${ordered === false ? "" : "ordered"}`)
+    .append(...steps);
 };
 
 const Step = (icon, title, description) => {
-  const w = jqe("div").addClass("ui step");
-  w.append(Icon(icon));
-  w.append(
+  const base = jqe("div").addClass("ui step");
+  const content = jqe("div").addClass("content");
+  content.append(
     jqe("div")
       .addClass("title")
       .text(title)
   );
-  w.append(
+  content.append(
     jqe("div")
       .addClass("description")
       .text(description)
   );
+  if (icon) base.append(Icon(icon));
+  base.append(content);
+  return base;
 };
 
 /**
@@ -194,6 +199,20 @@ const Page = (name, init) => {
 };
 
 const HomePage = Page("home", p => {
+  const stepWrapper = StepWrapper(
+    true,
+    Step(
+      null,
+      "Choose a Restaurant",
+      "Click on the map below to select a place to eat"
+    ).addClass("active"),
+    Step(null, "Tell  us what you can’t eat", "Enter your allergens below")
+  );
+
+  p.append(stepWrapper);
+});
+
+const AllergensPage = Page("allergens", p => {
   const allergenInput = Input.Text("allergen", "what's off the menu?").attr(
     "id",
     "allergen-input"
