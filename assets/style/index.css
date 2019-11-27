@@ -57,10 +57,15 @@ div.container.middle {
 }
 
 div.tag-box {
-  width: 50%;
-  max-width: 150px;
+  width: 90%;
   min-height: 25px;
   margin: 5px auto;
+}
+
+@media only screen and (min-width: 450px) {
+  div.tag-box {
+    max-width: 200px;
+  }
 }
 
 div.container.store-list {

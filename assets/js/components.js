@@ -253,24 +253,30 @@ const HomePage = Page("home", 0, p => {
 });
 
 const AllergensPage = Page("allergens", 1, p => {
-  const allergenInput = Input.Text("allergen", "what's off the menu?").attr(
-    "id",
-    "allergen-input"
-  );
-  const tagBox = jqe("div").addClass("tag-box");
+  const allergenInput = Input.TextLabeledButton(
+    "Add Allergen",
+    "what's off the menu?",
+    i => {
+      if (i.val() > "" && !user.allergens.includes(i.val().toLowerCase())) {
+        tagBox.append(Input.AllergenTag(i.val()));
+        user.addAllergen(i.val().toLowerCase());
+        i.val("");
+      }
+    }
+  ).css({ "margin-top": "3em" });
+  const tagBox = jqe("div")
+    .addClass("tag-box")
+    .css({ "margin-top": "2em" });
   // Add existing allergens to tagBox
   user.allergens.forEach(a => tagBox.append(Input.AllergenTag(a)));
 
-  /** Form for adding allergens to the session and to the tag-box */
-  const allergenForm = Form(v => {
-    if (v.allergen > "" && !user.allergens.includes(v.allergen.toLowerCase())) {
-      tagBox.append(Input.AllergenTag(v.allergen));
-      user.addAllergen(v.allergen.toLowerCase());
-      allergenInput.val("");
-    }
+  const nextBtn = Button("Done", () => render(ItemSearchPage)).css({
+    "margin-top": "1em",
+    width: "100%",
+    "max-width": "200px"
   });
 
-  allergenForm.append(allergenInput, tagBox);
-
-  p.append(allergenForm);
+  p.append(allergenInput, tagBox, nextBtn);
 });
+
+const ItemSearchPage = Page("item-search", 2, p => {});

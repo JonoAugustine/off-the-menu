@@ -5,6 +5,11 @@ body,
   background-color: #292930;
 }
 
+button {
+  color: white;
+  border: 1px solid white;
+}
+
 nav.navbar {
   color: white;
   background-color: #002d52;
