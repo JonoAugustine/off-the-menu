@@ -16,21 +16,31 @@ class SessionInfo {
 
   setPage(name) {
     this.page = name;
-    this.save;
+    this.save();
   }
 
   save() {
     localStorage["user"] = JSON.stringify(this);
+    console.log("session info updated", this);
   }
 }
 
+/**
+ * @returns {SessionInfo}
+ */
 const loadSession = () => {
-  return localStorage["user"]
-    ? JSON.parse(localStorage["user"])
+  console.log("Loading Session Info");
+  const si = localStorage["user"]
+    ? Object.setPrototypeOf(
+        JSON.parse(localStorage["user"]),
+        SessionInfo.prototype
+      )
     : new SessionInfo();
+  console.log("loaded session info", si);
+  return si;
 };
 
-const user = loadSession;
+const user = loadSession();
 
 const ProjectInfo = {
   name: "AllergicToThat"

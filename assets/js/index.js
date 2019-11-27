@@ -1,5 +1,15 @@
 $(document).ready(() => {
   theme.load();
 
-  render(user.page);
+  switch (user.page) {
+    case "home":
+      render(HomePage);
+      break;
+    case "allergens":
+      break;
+    case "search":
+      break;
+    default:
+      render(HomePage);
+  }
 });

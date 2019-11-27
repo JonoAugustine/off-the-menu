@@ -49,8 +49,7 @@ const root = () => $("#root");
  */
 const render = component => {
   const name = component.attr("page-name");
-  if (name !== null) {
-  }
+  if (name !== null) user.setPage(name);
   return root()
     .empty()
     .append(component);
@@ -92,6 +91,13 @@ const Input = {
         if (typeof callback === "function") callback($(tag.target));
         tag.target.remove();
       });
+  },
+  /**
+   * @returns A tag with the given text & a callback which removes
+   * the allergen from the user session.
+   */
+  AllergenTag: text => {
+    return Input.Tag(text, e => user.removeAllergen(e.text().toLowerCase()));
   }
 };
 
@@ -184,7 +190,7 @@ const Page = (name, init) => {
   // Add page container to paeg wrapper
   _page.append(Navbar(), _pageBody);
   // return page content container
-  return _pageBody;
+  return _page;
 };
 
 const HomePage = Page("home", p => {
@@ -194,18 +200,13 @@ const HomePage = Page("home", p => {
   );
   const tagBox = jqe("div").addClass("tag-box");
   // Add existing allergens to tagBox
+  user.allergens.forEach(a => tagBox.append(Input.AllergenTag(a)));
 
   /** Form for adding allergens to the session and to the tag-box */
   const allergenForm = Form(v => {
-    if (v.allergen > "" && !User.allergens.includes(v.allergen.toLowerCase())) {
-      tagBox.append(
-        Input.Tag(v.allergen.toLowerCase(), e => {
-          User.allergens = User.allergens.filter(
-            a => a.toLowerCase() !== e.text().toLowerCase()
-          );
-        })
-      );
-      User.allergens.push(v.allergen.toLowerCase());
+    if (v.allergen > "" && !user.allergens.includes(v.allergen.toLowerCase())) {
+      tagBox.append(Input.AllergenTag(v.allergen));
+      user.addAllergen(v.allergen.toLowerCase());
       allergenInput.val("");
     }
   });
