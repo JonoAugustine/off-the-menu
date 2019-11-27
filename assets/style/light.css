@@ -1,0 +1,25 @@
+nav.navbar {
+  color: white;
+  background-color: #189ab4;
+}
+
+div.tag-box {
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.tag {
+  margin: auto 5px;
+}
+
+.input {
+  border: 1px solid black;
+}
+
+button {
+  border: 1px solid black;
+  padding: 0.5rem;
+}

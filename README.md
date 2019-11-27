@@ -16,10 +16,16 @@ restarounts by allergins present in menu items.
 ### Min. Viable Product
 
 - Single Page
-- Users can input multiple allergins
-- Users can enter location by ZIP Code
+- User can input multiple allergins
+- User can enter location by ZIP Code
+
+- Show whether item has ingredients label or not
 
 ### Post MVP Goals
+
+- NLP for associating known allergens with associated chemicals and ingredients.
+
+## Log
 
 ## Dependencies
 

@@ -1,26 +1,102 @@
+/* TODO! Testing */
+div {
+  border: 1px dotted purple;
+}
+
+* {
+  font-family: "Quicksand", sans-serif;
+  overflow: hidden;
+}
+
 html,
 body,
 #root {
+  margin: 0;
   height: 100% !important;
   max-width: 100% !important;
   width: 100% !important;
+  overflow: hidden;
 }
 
-.mat-input {
-  padding: 0.5em;
-  border-radius: 0;
-  border: 1px solid black;
-}
+/*
+ * NAV
+ */
 
 nav.navbar {
   padding: 0.5em;
   min-width: 100%;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  color: white;
-  background-color: #189ab4;
+  position: relative;
 }
 
-nav.navbar .brand {
+nav.navbar h2.brand {
   text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+nav.navbar i.icon.mode-toggler {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  height: 100%;
+  cursor: pointer;
+}
+
+/*
+ * Container
+ */
+
+div.container.centered {
+  text-align: center;
+  align-content: center;
+}
+
+div.container.middle {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+div.tag-box {
+  width: 50%;
+  max-width: 150px;
+  min-height: 25px;
+  margin: 5px auto;
+}
+
+div.container.store-list {
+  min-height: 100%;
+  width: 50%;
+  margin: 1em auto;
+}
+
+div.store-listing {
+  height: 20px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+div.store-listing > .listing-section {
+  width: 25%;
+  max-height: 20px;
+  display: inline-block;
+}
+
+/**/
+.input {
+  min-width: 90%;
+  padding: 0.7em 0.5em;
+  border-radius: 0;
+  text-align: center;
+  background-color: transparent;
+}
+
+@media only screen and (min-width: 450px) {
+  .input {
+    min-width: 0 !important;
+  }
+}
+
+button {
+  padding: 0.5rem;
+  background-color: transparent;
 }
