@@ -1,3 +1,0 @@
-const Company = {
-  name: "AllergicToThat"
-};
