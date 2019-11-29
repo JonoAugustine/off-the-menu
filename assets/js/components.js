@@ -302,7 +302,9 @@ const HomePage = () =>
         console.log(input.val());
         if (input.val().length > 1) {
           user.store = input.val();
-          render(AllergensPage());
+          render(
+            user.allergens.length === 0 ? AllergensPage() : ItemSearchPage()
+          );
         }
       }
     );
