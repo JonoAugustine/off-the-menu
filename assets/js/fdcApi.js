@@ -20,6 +20,16 @@ class FdcSearchResult {
           id: fd.fdcId,
           description: fd.description.toLowerCase(),
           ingredients: fd.ingredients
+            ? fd.ingredients
+                .split(/[^a-z0-9\s+\-]/gi)
+                .map(s => s.trim())
+                .filter(s => s.length > 0)
+            : null,
+          ingredients_raw: fd.ingredients ? fd.ingredients : null,
+          /** @returns {Promise<*>} Promise awaiting food item response from FDC API. */
+          getData: function() {
+            return FdcSpec.getItem(this.id);
+          }
         };
       });
   }
@@ -72,9 +82,4 @@ const FdcSpec = {
   }
 };
 
-FdcSpec.search("", "sandwich")
-  .then(sr => {
-    console.log(sr);
-    return sr.results.filter(fd => typeof fd.ingredients === "string");
-  })
-  .then(filtered => console.log(filtered));
+FdcSpec.search("", "sandwich").then(filtered => console.log(filtered));
