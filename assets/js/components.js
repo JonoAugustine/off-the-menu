@@ -70,21 +70,27 @@ const jqe = (tag, callback) => {
   return e;
 };
 
+/**
+ * Craetes a new button element.
+ * @param {string} text The button text.
+ * @param {function} click The button click callback.
+ * @returns Newly created JQry button element.
+ */
 const Button = (text, click) => {
   const b = jqe("button").text(text);
   if (typeof click === "function") b.click(click);
   return b;
 };
 
+/** Creates a new Fomantic Container div */
 const Container = callback => jqe("div", callback).addClass("ui container");
-const Grid = () => Container().addClass("stackable grid");
-/**
- *
- * @param {string} width
- */
-const Column = width => jqe("div").addClass(`column ${width} wide`);
 
+/** Creates a new Fomantic Grid div */
+const Grid = () => Container().addClass("stackable grid");
+
+/** Object holding different input element creation functions. */
 const Input = {
+  /** Create a new text input with the given name and placeholder text. */
   Text: (name, placeholder) => {
     return jqe("input")
       .attr("name", name)
@@ -128,17 +134,27 @@ const Input = {
 };
 
 /**
- * Return a Fomantic (FA) icon element.
+ * Creates a Fomantic (FA) icon element.
  * @param {string} name Icon name
  */
 const Icon = name => jqe("i").addClass(`icon ${name}`);
 
-const StepWrapper = (ordered, ...steps) => {
+/**
+ * Creates a new Step wrapper div.
+ * @param  {...any} steps
+ */
+const StepWrapper = (...steps) => {
   return jqe("div")
-    .addClass(`ui steps three ${ordered === false ? "" : "ordered"}`)
+    .addClass("ui steps three")
     .append(...steps);
 };
 
+/**
+ * Creates a new Fomantic Step.
+ * @param {string} icon fomantic icon name
+ * @param {string} title step title
+ * @param {string} description step description
+ */
 const Step = (icon, title, description) => {
   const base = jqe("div").addClass("ui step");
   const content = jqe("div").addClass("content");
@@ -174,7 +190,8 @@ const Form = onSubmit => {
   });
 };
 
-const ThemeToggler = current => {
+/** Creates a clickable Fomantic Icon for toggling the current theme. */
+const ThemeToggler = () => {
   const icon = Icon(theme.current().togglerIcon).addClass("mode-toggler");
   icon.click(e => {
     $(e.target).removeClass(theme.current().togglerIcon);
@@ -201,7 +218,7 @@ const Footer = step => {
   const cont = Container();
   const grid = Grid();
   cont.append(grid);
-  const btnCol = Column("eight");
+  const btnCol = jqe("div").addClass(`column eight wide`);
   grid.append(btnCol);
 
   if (step > 0) {
@@ -215,7 +232,11 @@ const Footer = step => {
     .text("AllergicToThat")
     .click(() => window.open(ProjectInfo.srcUri, "_blank"));
 
-  grid.append(Column("eight").append(brand));
+  grid.append(
+    jqe("div")
+      .addClass(`column eight wide`)
+      .append(brand)
+  );
 
   return base.append(cont);
 };
@@ -243,7 +264,6 @@ const Page = (name, step, init) => {
 
   // Add steps to content container
   const stepWrapper = StepWrapper(
-    false,
     Step(
       "store",
       "Choose a Restaurant",
