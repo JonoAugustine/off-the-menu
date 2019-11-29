@@ -313,4 +313,49 @@ const AllergensPage = () =>
     p.append(allergenInput, tagBox, nextBtn);
   });
 
-const ItemSearchPage = () => Page("item-search", 2, p => {});
+console.log(true - false, false - true, false - false, true - true);
+
+const ItemSearchPage = () => {
+  const resultBox = jqe("div").addClass("search-result");
+
+  const Ingredient = (text, flagged) => {
+    return jqe("span")
+      .attr("data-flagged", flagged)
+      .addClass(`ui text ${flagged ? "red large" : ""}`)
+      .text(`${text}, `);
+  };
+
+  const SetResults = (name, ingredients) => {
+    resultBox.empty();
+    const header = jqe("h3").text(`Top Result for: "${name}"`);
+    const ing = ingredients
+      .map(i => Ingredient(i, Math.floor(Math.random() * 100) % 2 == 0)) // TODO!
+      .sort((a, b) => a.attr("flagged") - b.attr("flagged"));
+
+    return resultBox.append(header, jqe("hr"), ...ing);
+  };
+
+  return Page("item-search", 2, p => {
+    const storeName = jqe("h2")
+      .text(user.store)
+      .css({ "margin-top": "0", "text-decoration": "underline" });
+    const searchBox = Input.TextLabeledButton(
+      "Search",
+      "Search Menu Item",
+      input => {
+        const v = input.val();
+        // TODO Search
+        resultBox.empty().append(
+          SetResults(
+            "<ITEM_NAME>",
+            [1, 2, 3, 4, 5, 6, 7].map(n => `<ing_${n}>`)
+          )
+        );
+      }
+    ).css({
+      "margin-bottom": "2em"
+    });
+
+    p.append(storeName, searchBox, resultBox);
+  });
+};

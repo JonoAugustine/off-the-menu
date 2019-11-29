@@ -88,6 +88,11 @@ div.container.middle {
   margin-bottom: auto;
 }
 
+div.search-result {
+  max-width: 400px;
+  margin: auto;
+}
+
 div.tag-box {
   width: 90%;
   min-height: 25px;
