@@ -4,14 +4,14 @@ class FdcSearchResult {
    * @param {string} store
    */
   constructor(raw, store) {
-    store = store.replace(/[^A-Z]/gi, "").toLowerCase();
+    store = store.replace(/[^A-Z0-9]/gi, "").toLowerCase();
     this.request = raw.foodSearchCriteria;
     this.raw = raw;
     this.responseCount = raw.totalHits;
     this.results = raw.foods
       .filter(fd =>
         fd.description
-          .replace(/[^A-Z]/gi, "")
+          .replace(/[^A-Z0-9]/gi, "")
           .toLowerCase()
           .includes(store)
       )
