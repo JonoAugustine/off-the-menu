@@ -1,4 +1,4 @@
 $(document).ready(() => {
   theme.load();
-  render(ItemSearchPage());
+  render(HomePage());
 });

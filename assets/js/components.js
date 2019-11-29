@@ -1,34 +1,21 @@
+/** Simple class to represent themes. */
+class Theme {
+  constructor(name, location, togglerIcon) {
+    this.name = name;
+    this.location = location;
+    this.togglerIcon = togglerIcon;
+  }
+}
+
+/** Object used to track & toggle themes. */
 const theme = {
-  light: {
-    location: "./assets/style/light.css",
-    primary: "#f9f9f9",
-    togglerIcon: "moon"
-  },
-  dark: {
-    location: "./assets/style/dark.css",
-    primary: "#1f1f1f",
-    togglerIcon: "sun"
-  },
+  /** Light Theme */
+  light: new Theme("light", "./assets/style/light.css", "moon"),
+  /** dark Theme */
+  dark: new Theme("dark", "./assets/style/dark.css", "sun"),
+  /** Gets the current src link of the theme import. */
   link: function() {
     return $("#theme-link");
-  },
-  load: function() {
-    // Attempt to load & set theme from local storage
-    const lst = localStorage["theme"];
-    if (typeof lst === "string" && lst.includes("dark")) {
-      this.link().attr("href", this.dark.location);
-    } else {
-      this.link().attr("href", this.light.location);
-    }
-  },
-  toggle: function() {
-    const nTheme = this.link()
-      .attr("href")
-      .includes("light")
-      ? this.dark.location
-      : this.light.location;
-    this.link().attr("href", nTheme);
-    localStorage["theme"] = nTheme;
   },
   current: function() {
     return this.link()
@@ -36,6 +23,22 @@ const theme = {
       .includes("dark")
       ? this.dark
       : this.light;
+  },
+  /** Loads the saved theme to the page. Defaults to light. */
+  load: function() {
+    // Attempt to load & set theme from local storage
+    const lst = localStorage["theme"];
+    if (typeof lst === "string" && lst == this.dark.name) {
+      this.link().attr("href", this.dark.location);
+    } else {
+      this.link().attr("href", this.light.location);
+    }
+  },
+  /** Toggles the current theme src. */
+  toggle: function() {
+    const nTheme = this.current() == this.light ? this.dark : this.light;
+    this.link().attr("href", nTheme.location);
+    localStorage["theme"] = nTheme.name;
   }
 };
 
@@ -74,7 +77,7 @@ const Button = (text, click) => {
 };
 
 const Container = callback => jqe("div", callback).addClass("ui container");
-const Grid = callback => Container().addClass("stackable grid");
+const Grid = () => Container().addClass("stackable grid");
 /**
  *
  * @param {string} width
@@ -312,8 +315,6 @@ const AllergensPage = () =>
 
     p.append(allergenInput, tagBox, nextBtn);
   });
-
-console.log(true - false, false - true, false - false, true - true);
 
 const ItemSearchPage = () => {
   const resultBox = jqe("div").addClass("search-result");
