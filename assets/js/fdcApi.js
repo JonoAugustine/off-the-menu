@@ -18,7 +18,8 @@ class FdcSearchResult {
       .map(fd => {
         return {
           id: fd.fdcId,
-          description: fd.description.toLowerCase()
+          description: fd.description.toLowerCase(),
+          ingredients: fd.ingredients
         };
       });
   }
@@ -71,10 +72,9 @@ const FdcSpec = {
   }
 };
 
-FdcSpec.search("Wendys", "spicy", "chicken", "sandwich")
-  .then(sr => FdcSpec.getItem(sr.results[0].id))
-  .then(item => {
-    console.time("X");
-    console.log(item, contains("lactose", item));
-    console.timeEnd("X");
-  });
+FdcSpec.search("", "sandwich")
+  .then(sr => {
+    console.log(sr);
+    return sr.results.filter(fd => typeof fd.ingredients === "string");
+  })
+  .then(filtered => console.log(filtered));
