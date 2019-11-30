@@ -1,0 +1,33 @@
+{
+  "foodSearchCriteria": {
+    "generalSearchInput": "sandwich",
+    "pageNumber": 1,
+    "requireAllWords": false
+  },
+  "totalHits": 3035,
+  "currentPage": 1,
+  "totalPages": 61,
+  "foods": [
+    {
+      "fdcId": 529731,
+      "description": "SANDWICH",
+      "dataType": "Branded",
+      "gtinUpc": "070640310500",
+      "publishedDate": "2019-04-01",
+      "brandOwner": "Wells Enterprises, Inc.",
+      "ingredients": "REDUCED FAT ICE CREAM [MILK, CREAM, FUDGE SAUCE {HIGH FRUCTOSE CORN SYRUP, SWEETENED CONDENSED SKIM MILK (SKIM MILK, SUGAR, CORN SYRUP), BUTTER (CREAM, SALT), WATER, COCOA PROCESSED WITH ALKALI, CHOCOLATE LIQUOR, CONTAINS 2% OF LESS OF SUGAR, MONO AND DIGLYCERIDES, SALT, XANTHAN GUM, ARTIFICIAL FLAVORS}, SUGAR, CORN SYRUP, SKIM MILK, WHEY, BUTTERMILK, COCOA PROCESSED WITH ALKALI, CONTAINS 1% OR LESS OF MONO AND DIGLYCERIDES, CAROB BEAN GUM, CELLULOSE GUM, CARRAGEENAN, VITAMIN A PALMITATE], WAFERS (WHEAT FLOUR, SUGAR, PALM OIL, COCOA, DEXTROSE, CARAMEL COLOR, CORN FLOUR, CORN SYRUP, FOOD STARCH-MODIFIED, NATURAL AND ARTIFICIAL FLAVOR, SALT, BAKING SODA, SOY LECITHIN).",
+      "allHighlightFields": "",
+      "score": 406.35532
+    },
+    {
+      "fdcId": 481873,
+      "description": "SANDWICH",
+      "dataType": "Branded",
+      "gtinUpc": "085239002056",
+      "publishedDate": "2019-04-01",
+      "brandOwner": "Target Stores",
+      "allHighlightFields": "",
+      "score": 406.35532
+    }
+  ]
+}
