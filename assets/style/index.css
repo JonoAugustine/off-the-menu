@@ -85,7 +85,16 @@ div.container.middle {
 
 div.search-result {
   max-width: 400px;
+  max-height: 300px;
+  overflow: auto;
+  scrollbar-width: none;
   margin: auto;
+}
+
+@media only screen and (min-width: 600px) {
+  div.search-result {
+    max-height: none;
+  }
 }
 
 div.tag-box {

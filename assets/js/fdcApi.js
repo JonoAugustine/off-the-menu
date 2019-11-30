@@ -67,7 +67,9 @@ const FdcSpec = {
       })
     }).then(result => {
       console.log("FDC API Search Result (raw)", result);
-      return new FdcSearchResult(result, store);
+      const r = new FdcSearchResult(result, store);
+      console.log("FdcSearchResult", r);
+      return r;
     });
   },
   getItem: itemID => {
@@ -81,5 +83,3 @@ const FdcSpec = {
     });
   }
 };
-
-FdcSpec.search("", "sandwich").then(filtered => console.log(filtered));

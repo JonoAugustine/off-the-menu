@@ -123,11 +123,12 @@ const Input = {
   /**
    * @param {function} click receives the text input element.
    */
-  TextLabeledButton: (labelText, placeholder, click) => {
+  TextLabeledButton: (labelText, placeholder, click, val) => {
     const w = jqe("div").addClass("ui action input");
     const i = jqe("input")
       .attr("type", labelText)
-      .attr("placeholder", placeholder);
+      .attr("placeholder", placeholder)
+      .val(val);
     const b = Button(labelText, () => click(i));
     return w.append(i, b);
   }
@@ -306,7 +307,8 @@ const HomePage = () =>
             user.allergens.length === 0 ? AllergensPage() : ItemSearchPage()
           );
         }
-      }
+      },
+      user.store
     );
     p.append(storeInput);
   });
@@ -343,19 +345,29 @@ const ItemSearchPage = () => {
 
   const Ingredient = (text, flagged) => {
     return jqe("span")
-      .attr("data-flagged", flagged)
+      .attr("data-flagged", flagged ? 1 : -1)
       .addClass(`ui text ${flagged ? "red large" : ""}`)
       .text(`${text}, `);
   };
 
+  /**
+   *
+   * @param {*} name
+   * @param {Array<string>} ingredients
+   */
   const SetResults = (name, ingredients) => {
     resultBox.empty();
     const header = jqe("h3").text(`Top Result for: "${name}"`);
     const ing = ingredients
-      .map(i => Ingredient(i, Math.floor(Math.random() * 100) % 2 == 0)) // TODO!
-      .sort((a, b) => a.attr("flagged") - b.attr("flagged"));
+      .map(i =>
+        Ingredient(
+          i,
+          i.split(/\s+/).some(s => user.allergens.includes(s.toLowerCase()))
+        )
+      )
+      .sort((a, b) => b.attr("data-flagged") - a.attr("data-flagged"));
 
-    return resultBox.append(header, jqe("hr"), ...ing);
+    resultBox.append(header, jqe("hr"), ...ing);
   };
 
   return Page("item-search", 2, p => {
@@ -366,14 +378,20 @@ const ItemSearchPage = () => {
       "Search",
       "Search Menu Item",
       input => {
-        const v = input.val();
-        // TODO Search
-        resultBox.empty().append(
-          SetResults(
-            "<ITEM_NAME>",
-            [1, 2, 3, 4, 5, 6, 7].map(n => `<ing_${n}>`)
-          )
-        );
+        const v = input.val().trim();
+        FdcSpec.search(user.store, ...v.split(/\s+/)).then(sr => {
+          sr.results = sr.results.filter(
+            r => typeof r.ingredients_raw === "string"
+          );
+          if (
+            sr.results.length == 0 ||
+            typeof sr.results[0].ingredients_raw !== "string"
+          ) {
+            resultBox.empty().append(`Nothing found for "${v}"`);
+          } else {
+            SetResults(sr.results[0].description, sr.results[0].ingredients);
+          }
+        });
       }
     ).css({
       "margin-bottom": "2em"
