@@ -1,3 +1,4 @@
-const ProjectInfo = {
-  name: "AllergicToThat"
-};
+$(document).ready(() => {
+  theme.load();
+  render(HomePage());
+});

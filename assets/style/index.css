@@ -1,11 +1,6 @@
-/* TODO! Testing /
-div {
-  border: 1px dotted purple;
-}
-*/
 * {
   font-family: "Quicksand", sans-serif;
-  overflow: hidden;
+  border-radius: 0 !important;
 }
 
 html,
@@ -16,6 +11,10 @@ body,
   max-width: 100% !important;
   width: 100% !important;
   overflow: hidden;
+}
+
+.page {
+  height: 100%;
 }
 
 /*
@@ -42,6 +41,34 @@ nav.navbar i.icon.mode-toggler {
   cursor: pointer;
 }
 
+footer.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 40px;
+  padding: 5px;
+  padding-bottom: 20px;
+}
+
+footer.footer {
+  text-align: center;
+}
+
+footer.footer h4 {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 600px) {
+  footer.footer {
+    text-align: left;
+  }
+  footer.footer h4 {
+    text-align: right;
+  }
+}
+
 /*
  * Container
  */
@@ -51,11 +78,36 @@ div.container.centered {
   align-content: center;
 }
 
+div.container.middle {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+div.search-result {
+  max-width: 400px;
+  max-height: 300px;
+  overflow: auto;
+  scrollbar-width: none;
+  margin: auto;
+}
+
+@media only screen and (min-width: 600px) {
+  div.search-result {
+    max-height: none;
+  }
+}
+
 div.tag-box {
-  width: 50%;
-  max-width: 150px;
+  width: 90%;
   min-height: 25px;
   margin: 5px auto;
+  margin-top: 2em;
+}
+
+@media only screen and (min-width: 450px) {
+  div.tag-box {
+    max-width: 200px;
+  }
 }
 
 div.container.store-list {
@@ -77,17 +129,23 @@ div.store-listing > .listing-section {
 }
 
 /**/
-.input {
-  min-width: 90%;
+input,
+div.input > input {
   padding: 0.7em 0.5em;
   border-radius: 0;
   text-align: center;
   background-color: transparent;
 }
 
+div.input {
+  min-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media only screen and (min-width: 450px) {
-  .input {
-    min-width: 0 !important;
+  div.input {
+    min-width: 45% !important;
   }
 }
 
@@ -100,4 +158,15 @@ button {
   height: 60vh;
   width: 100%;
   text-align: center;
+}
+
+.ui.steps,
+.ui.steps * {
+  text-align: left;
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.steps .ui.step.not-active {
+    display: none;
+  }
 }
