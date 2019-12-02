@@ -25,8 +25,8 @@ nav.navbar .brand {
   text-align: center;
 }
 
-#map{
-  height: 400px;
-  width: 30%;
-  text-align: center;
+#map {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
 }
