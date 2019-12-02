@@ -218,15 +218,6 @@ const GoogleMap = () => {
   const base = jqe("div")
     .attr("id", "map")
     .addClass("map-wrapper");
-
-  const script = jqe("script")
-    .attr("async", true)
-    .attr("defer", true)
-    .attr("type", "text/javascript")
-    .attr("src", MapsSpec.getImportUri());
-
-  base.append(script);
-
   return base;
 };
 
@@ -311,22 +302,8 @@ const Page = (name, step, init) => {
 
 const HomePage = () =>
   Page("home", 0, p => {
-    // TODO! Get rid of this when we can use MAPs events
-    const storeInput = Input.TextLabeledButton(
-      "NEXT",
-      "Where do you want to eat?",
-      input => {
-        console.log(input.val());
-        if (input.val().length > 1) {
-          user.store = input.val();
-          render(
-            user.allergens.length === 0 ? AllergensPage() : ItemSearchPage()
-          );
-        }
-      },
-      user.store
-    );
-    p.append(storeInput);
+    // TODO! Update google map's callback on click
+    p.append(GoogleMap());
   });
 
 const AllergensPage = () =>

@@ -155,9 +155,11 @@ button {
 }
 
 .map-wrapper {
-  height: 60vh;
+  margin-top: 3em;
+  height: 450px;
   width: 100%;
   text-align: center;
+  color: black !important;
 }
 
 .ui.steps,
