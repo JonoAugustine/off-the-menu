@@ -16,13 +16,16 @@ class FdcSearchResult {
           .includes(store)
       )
       .map(fd => {
+        const dv = fd.description.split(",");
+        dv.shift();
+        fd.ingredients = (fd.ingredients ? fd.ingredients : "") + dv.join(" ");
         return {
           id: fd.fdcId,
           description: fd.description.toLowerCase(),
           ingredients: fd.ingredients
             ? fd.ingredients
                 .split(/[^a-z0-9\s+\-]/gi)
-                .map(s => s.trim())
+                .map(s => s.trim().toLowerCase())
                 .filter(s => s.length > 0)
             : null,
           ingredients_raw: fd.ingredients ? fd.ingredients : null,

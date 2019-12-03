@@ -154,6 +154,15 @@ button {
   background-color: transparent;
 }
 
+.map-wrapper {
+  margin-top: 3em;
+  margin-bottom: 1em;
+  height: 450px;
+  width: 100%;
+  text-align: center;
+  color: black !important;
+}
+
 .ui.steps,
 .ui.steps * {
   text-align: left;

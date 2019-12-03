@@ -214,6 +214,12 @@ const Navbar = () => {
   return base;
 };
 
+const GoogleMap = () => {
+  return jqe("div")
+    .attr("id", "map")
+    .addClass("map-wrapper");
+};
+
 const Footer = step => {
   const base = jqe("footer").addClass("footer");
   const cont = Container();
@@ -295,22 +301,20 @@ const Page = (name, step, init) => {
 
 const HomePage = () =>
   Page("home", 0, p => {
-    // TODO! Get rid of this when we can use MAPs events
-    const storeInput = Input.TextLabeledButton(
-      "NEXT",
-      "Where do you want to eat?",
-      input => {
-        console.log(input.val());
-        if (input.val().length > 1) {
-          user.store = input.val();
-          render(
-            user.allergens.length === 0 ? AllergensPage() : ItemSearchPage()
-          );
-        }
-      },
-      user.store
-    );
-    p.append(storeInput);
+    const btnCnt = jqe("div");
+    p.append(GoogleMap());
+    p.append(btnCnt);
+    onStoreNameUpdate = name => {
+      btnCnt.empty();
+      const goBtn = Button(`Go To ${name}`, name => {
+        render(AllergensPage());
+      });
+      btnCnt.append(goBtn);
+    };
+    setTimeout(() => {
+      initialize();
+      loadGeoLocation();
+    }, 500);
   });
 
 const AllergensPage = () =>
@@ -362,7 +366,7 @@ const ItemSearchPage = () => {
       .map(i =>
         Ingredient(
           i,
-          i.split(/\s+/).some(s => user.allergens.includes(s.toLowerCase()))
+          i.split(/\s+/).some(s => user.allergens.some(a => s.includes(a)))
         )
       )
       .sort((a, b) => b.attr("data-flagged") - a.attr("data-flagged"));
