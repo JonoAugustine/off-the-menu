@@ -151,6 +151,7 @@ div.input {
 
 button {
   padding: 0.5rem;
+  cursor: pointer;
   background-color: transparent;
 }
 
