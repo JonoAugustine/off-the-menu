@@ -21,7 +21,7 @@ function initialize() {
     var request = {
       location: event.latLng,
       radius: 4828.03,
-      types: ["cafe", "food"]
+      types: ["restaurant", "cafe", "food"]
     };
     service.nearbySearch(request, callback);
   });
