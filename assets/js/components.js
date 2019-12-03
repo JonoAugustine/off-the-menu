@@ -215,10 +215,9 @@ const Navbar = () => {
 };
 
 const GoogleMap = () => {
-  const base = jqe("div")
+  return jqe("div")
     .attr("id", "map")
     .addClass("map-wrapper");
-  return base;
 };
 
 const Footer = step => {
@@ -302,8 +301,20 @@ const Page = (name, step, init) => {
 
 const HomePage = () =>
   Page("home", 0, p => {
-    // TODO! Update google map's callback on click
+    const btnCnt = jqe("div");
     p.append(GoogleMap());
+    p.append(btnCnt);
+    onStoreNameUpdate = name => {
+      btnCnt.empty();
+      const goBtn = Button(`Go To ${name}`, name => {
+        render(AllergensPage());
+      });
+      btnCnt.append(goBtn);
+    };
+    setTimeout(() => {
+      initialize();
+      loadGeoLocation();
+    }, 500);
   });
 
 const AllergensPage = () =>
@@ -355,7 +366,7 @@ const ItemSearchPage = () => {
       .map(i =>
         Ingredient(
           i,
-          i.split(/\s+/).some(s => user.allergens.includes(s.toLowerCase()))
+          i.split(/\s+/).some(s => user.allergens.some(a => s.includes(a)))
         )
       )
       .sort((a, b) => b.attr("data-flagged") - a.attr("data-flagged"));

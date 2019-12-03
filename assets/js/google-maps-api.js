@@ -12,7 +12,6 @@ function initialize() {
     zoom: 15
   });
 
-  
   service = new google.maps.places.PlacesService(map);
 
   google.maps.event.addListener(map, "click", function(event) {
@@ -35,6 +34,8 @@ function callback(results, status) {
     }
   }
 }
+
+let onStoreNameUpdate = name => {};
 
 function createMarker(place) {
   var placeLoc = place.geometry.location;
@@ -59,7 +60,8 @@ function createMarker(place) {
   marker.addListener("click", function() {
     infowindow.open(map, marker);
     infowindow.setContent(place.name);
-    console.log(place.name);
+    user.store = place.name;
+    onStoreNameUpdate(place.name);
   });
   return marker;
 }
