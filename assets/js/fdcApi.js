@@ -66,7 +66,8 @@ const FdcSpec = {
       url: FdcSpec.searchUri(),
       headers: { "Content-Type": "application/json" },
       data: JSON.stringify({
-        generalSearchInput: [store, ...tokens].join(" ")
+        generalSearchInput: tokens.join(" "),
+        brandOwner: store
       })
     }).then(result => {
       console.log("FDC API Search Result (raw)", result);
