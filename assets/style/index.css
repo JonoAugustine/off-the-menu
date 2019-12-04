@@ -104,6 +104,10 @@ div.tag-box {
   margin-top: 2em;
 }
 
+div.tag-box > div {
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 450px) {
   div.tag-box {
     max-width: 200px;
@@ -174,7 +178,8 @@ button {
   }
 }
 
-img.brand {
+.icon.brand {
   max-width: 25px;
   max-height: 25px;
+  cursor: pointer;
 }
