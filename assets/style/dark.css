@@ -74,8 +74,3 @@ div.ui.step {
 .ui.steps .step.not-active:before {
   color: white !important;
 }
-
-img.brand {
-  -webkit-filter: invert(1);
-  filter: invert(1);
-}

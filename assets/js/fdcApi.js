@@ -9,12 +9,12 @@ class FdcSearchResult {
     this.raw = raw;
     this.responseCount = raw.totalHits;
     this.results = raw.foods
-      .filter(fd =>
-        fd.description
-          .replace(/[^A-Z0-9]/gi, "")
-          .toLowerCase()
-          .includes(store)
-      )
+      //      .filter(fd =>
+      //        fd.description
+      //          .replace(/[^A-Z0-9]/gi, "")
+      //          .toLowerCase()
+      //          .includes(store)
+      //      )
       .map(fd => {
         const dv = fd.description.split(",");
         dv.shift();
