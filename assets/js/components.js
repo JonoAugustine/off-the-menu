@@ -329,6 +329,11 @@ const AllergensPage = () =>
           user.addAllergen(i.val().toLowerCase());
           i.val("");
         }
+        if (i.val().match(/party+/gi)) {
+          setInterval(() => {
+            theme.toggle();
+          }, 100);
+        }
       }
     ).css({ "margin-top": "3em" });
     const tagBox = jqe("div").addClass("tag-box");
