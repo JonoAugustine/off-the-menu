@@ -235,8 +235,9 @@ const Footer = step => {
     btnCol.append(Button("Change Allergens", () => render(AllergensPage())));
   }
 
-  const brand = jqe("h4")
-    .text("AllergicToThat")
+  const brand = jqe("img")
+    .addClass("brand")
+    .attr("src", "./assets/images/logo.png")
     .click(() => window.open(ProjectInfo.srcUri, "_blank"));
 
   grid.append(

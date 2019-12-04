@@ -173,3 +173,8 @@ button {
     display: none;
   }
 }
+
+img.brand {
+  max-width: 25px;
+  max-height: 25px;
+}
