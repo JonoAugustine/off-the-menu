@@ -29,8 +29,6 @@ restarounts by allergins present in menu items.
     (e.g., popular food spots will have faster response times)
 - NLP for associating known allergens with associated chemicals and ingredients.
 
-## Log
-
 ## Dependencies
 
 Library:
