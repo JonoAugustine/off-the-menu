@@ -229,7 +229,7 @@ const Footer = step => {
   grid.append(btnCol);
 
   if (step > 0) {
-    btnCol.append(Button("Chnage Restaurant", () => render(HomePage())));
+    btnCol.append(Button("Change Restaurant", () => render(HomePage())));
   }
   if (step > 1) {
     btnCol.append(Button("Change Allergens", () => render(AllergensPage())));

@@ -4,14 +4,14 @@ var infowindow = new google.maps.InfoWindow();
 var request;
 var service;
 var markers = [];
-
+//Initialize Map with JHU coordinates and set map parameters
 function initialize() {
   var center = new google.maps.LatLng(39.3259, -76.6216);
   map = new google.maps.Map(document.getElementById("map"), {
     center: center,
     zoom: 15
   });
-
+  //A Places Nearby search is initiated with a call to the PlacesService's nearbySearch() method, which will return an array of PlaceResult objects. Note that the nearbySearch() method replaces the search() method as of version 3.9.
   service = new google.maps.places.PlacesService(map);
 
   google.maps.event.addListener(map, "click", function(event) {
@@ -65,7 +65,7 @@ function createMarker(place) {
   });
   return marker;
 }
-
+//Clears previous markers when map is clicked to return new markers for new results
 function clearResults(markers) {
   for (var m in markers) {
     markers[m].setMap(null);
@@ -76,7 +76,7 @@ function clearResults(markers) {
 // GET POSITION
 infoWindow = new google.maps.InfoWindow();
 
-// Try HTML5 geolocation.
+// Try HTML5 geolocation.The Geolocation.getCurrentPosition() method is used to get the current position of the device.
 function loadGeoLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -101,48 +101,3 @@ function loadGeoLocation() {
   }
 }
 
-//google.maps.event.addDomListener(window, "load", initialize);
-
-//   //check if geolocation is available
-// if (navigator.geolocation) {
-//   navigator.geolocation.getCurrentPosition(function(position){
-//     //Retrieve position properties
-//     initMap(position);
-//     //Retrieve lat & long
-//     console.log(position);
-//     });
-// }
-
-// var map;
-// var service;
-// var infowindow;
-
-// function initMap(position) {
-//   var userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-//   map = new google.maps.Map(document.getElementById('map'), {
-//       center: userLocation,
-//       zoom: 15
-//     });
-//   var marker = new google.maps.Marker({
-//     position: userLocation,
-//     map: map,
-//   });
-//   var request = {
-//     position: location,
-//     radius: '5000',
-//     type: ['Starbucks']
-//   };
-
-//   service = new google.maps.places.PlacesService(map);
-//   service.nearbySearch(request, callback);
-// }
-
-// function callback(results, status) {
-//   if (status == google.maps.places.PlacesServiceStatus.OK) {
-//     for (var i = 0; i < results.length; i++) {
-//       var place = results[i];
-//       createMarker(results[i]);
-//     }
-//   }
-// }
