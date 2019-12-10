@@ -1,0 +1,91 @@
+$breakpoints: (
+  phone: 400px,
+  phone-wide: 480px,
+  phablet: 560px,
+  tablet-small: 640px,
+  tablet: 768px,
+  tablet-wide: 1024px,
+  desktop: 1248px,
+  desktop-wide: 1440px
+);
+
+@mixin breakpoint($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+    @if $type == max {
+      $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+
+$light-theme: false;
+
+$themes: (
+  "dark": (
+    "primary": rgba(0, 166, 251, 1),
+    "secondary": rgba(36, 106, 115, 1),
+    "tertiary": rgba(37, 92, 153, 1),
+    "danger": rgba(167, 29, 49, 1),
+    "base": rgba(25, 23, 22, 1),
+    "text": rgba(253, 255, 252, 1)
+  ),
+  "light": (
+    "primary": rgba(10, 211, 255, 1),
+    "secondary": rgba(28, 93, 153, 1),
+    "danger": rgba(167, 29, 49, 1),
+    "base": rgba(252, 255, 247, 1),
+    "text": rgba(15, 15, 15, 1)
+  )
+);
+
+@function color($color-name) {
+  @if $light-theme {
+    @return map-get(map-get($themes, "light"), $color-name);
+  } @else {
+    @return map-get(map-get($themes, "dark"), $color-name);
+  }
+}
+
+@mixin css-triangle(
+  $color,
+  $direction,
+  $size: 6px,
+  $position: absolute,
+  $round: false
+) {
+  @include pseudo($pos: $position);
+  width: 0;
+  height: 0;
+  @if $round {
+    border-radius: 3px;
+  }
+  @if $direction == down {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid $color;
+    margin-top: 0 - round($size / 2.5);
+  } @else if $direction == up {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+    margin-bottom: 0 - round($size / 2.5);
+  } @else if $direction == right {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
+    margin-right: -$size;
+  } @else if $direction == left {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-right: $size solid $color;
+    margin-left: -$size;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}

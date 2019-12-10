@@ -45,18 +45,7 @@ const theme = {
 /** Root div to manipulate. */
 const root = () => $("#root");
 
-/**
- * Empties root element and appends child element.
- * @param {*} component child DOM element
- * @returns The root element with given child appended.
- */
-const render = component => {
-  const name = component.attr("page-name");
-  if (name !== null) user.setPage(name);
-  return root()
-    .empty()
-    .append(component);
-};
+
 
 /**
  * Simplified DOM Element creation. Same as `$("<div>")`
