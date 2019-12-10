@@ -1,3 +1,4 @@
+// Currently non-functional
 const ThemeController = {
   light: false,
   current: function() {

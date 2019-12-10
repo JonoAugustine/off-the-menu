@@ -29,6 +29,7 @@
     "sass": "^1.23.7"
   },
   "dependencies": {
-    "jquery": "^3.4.1"
+    "jquery": "^3.4.1",
+    "number-to-words": "^1.2.4"
   }
 }

@@ -1,0 +1,25 @@
+@import "../../style/index.scss";
+@import "https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.2/dist/semantic.min.css";
+
+.ui.steps {
+  * {
+    color: color("text") !important;
+  }
+  .ui.step {
+    background-color: color(secondary);
+
+    &:after {
+      background-color: color(secondary) !important;
+      border-color: color("base") !important;
+    }
+
+    &.active {
+      background-color: color("primary");
+
+      &:after {
+        background-color: color(primary) !important;
+        border-color: transparent !important;
+      }
+    }
+  }
+}
