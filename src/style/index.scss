@@ -49,6 +49,9 @@ $themes: (
   }
 }
 
+$margin: 10px;
+$padding: 10px;
+
 @mixin css-triangle(
   $color,
   $direction,
@@ -83,9 +86,4 @@ $themes: (
     border-right: $size solid $color;
     margin-left: -$size;
   }
-}
-
-html,
-body {
-  height: 100%;
 }

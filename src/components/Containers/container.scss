@@ -1,0 +1,22 @@
+@import "../../style/index.scss";
+
+div.container {
+  width: 100%;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+
+  &.fluid {
+    max-width: 100%;
+  }
+
+  &.centered {
+    text-align: center;
+    align-content: center;
+  }
+
+  &.middle {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}

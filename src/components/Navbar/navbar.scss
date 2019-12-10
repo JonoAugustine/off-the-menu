@@ -1,0 +1,15 @@
+@import "../../style/index.scss";
+
+nav.navbar {
+  padding: $padding;
+  margin-bottom: $margin;
+
+  a.brand {
+    font-size: 2rem;
+  }
+
+  * {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
