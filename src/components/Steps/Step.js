@@ -12,7 +12,7 @@ import "./step.scss";
  */
 const Step = (title, description, icon, active) => {
   const base = Div("div")
-    .addClass(`ui step ${active ? "active" : ""}`)
+    .addClass(`ui step ${active ? "active" : "not-active"}`)
     .append(
       Div()
         .addClass("content")

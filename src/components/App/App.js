@@ -4,8 +4,11 @@ import { Toggler } from "../Input";
 import { ThemeController } from "../../api";
 import { Icon } from "../Image";
 import { StepList, Step } from "../Steps";
+import { Map as GoogleMap } from "../Map";
 
 import "./app.scss";
+
+import { GoogleMapsApi } from "../../api/Maps";
 
 const App = () => {
   const base = Div().attr("id", "app");
@@ -29,7 +32,9 @@ const App = () => {
       Icon().addClass("search")
     )
   );
+
   page.append(steps);
+  page.append(GoogleMap());
 
   return base.append(Navbar(), page);
 };
