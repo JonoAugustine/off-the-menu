@@ -1,6 +1,6 @@
 import { elementOf } from "..";
 import { Header } from "../Text";
-import { Container } from "../Containers";
+import { Container, Div } from "../Containers";
 
 import "./navbar.scss";
 
@@ -8,15 +8,21 @@ const Navbar = () => {
   const base = elementOf("nav").addClass("navbar");
   const container = Container();
 
-  const brand = elementOf("a")
+  const brand = Div()
     .addClass("brand")
-    .attr("href", "#")
-    .text("Off The Menu");
+    .append(
+      elementOf("a")
+        .attr("href", "#")
+        .text("Off The Menu")
+    );
 
   // TODO Profile dropdown
-  const profileMenu = Header(4, "Profile").addClass("dropdown");
+  const menu = Div().addClass("nav-menu");
+  const profileMenu = Header(3, "Profile").addClass("dropdown");
 
-  container.append(brand, profileMenu);
+  menu.append(profileMenu);
+
+  container.append(brand, menu);
 
   base.append(container);
   return base;

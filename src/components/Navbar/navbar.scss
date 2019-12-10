@@ -4,12 +4,23 @@ nav.navbar {
   padding: $padding;
   margin-bottom: $margin;
 
-  a.brand {
-    font-size: 2rem;
-  }
+  border-bottom: 1px solid color(primary);
+  background-color: lighten(color(base), 1%);
 
-  * {
-    margin-top: auto;
-    margin-bottom: auto;
+  & > .container {
+    display: flex;
+    justify-content: space-around;
+
+    .brand {
+      font-size: 2rem;
+      margin: auto;
+      margin-left: 0;
+    }
+
+    div.nav-menu {
+      margin: auto;
+      margin-right: 0;
+      text-align: right;
+    }
   }
 }
