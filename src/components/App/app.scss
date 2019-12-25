@@ -19,10 +19,10 @@ body,
 
 a {
   text-decoration: none;
-  color: color("text");
+  color: var(--color-text);
 }
 
 #app {
   height: 100%;
-  background-color: color("base");
+  background-color: var(--color-base);
 }

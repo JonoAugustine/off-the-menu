@@ -14,7 +14,7 @@ label.toggler {
 
     /* Toggler ON background config */
     &:checked + span.slider {
-      background-color: color("primary");
+      background-color: var(--color-primary);
     }
 
     /* Toggler  */
@@ -38,8 +38,8 @@ label.toggler {
     bottom: 0;
     border-radius: 34px;
     // Toggler OFF background color
-    border-color: color("text");
-    background-color: color("secondary");
+    border-color: var(--color-text);
+    background-color: var(--color-secondary);
     -webkit-transition: 0.4s;
     transition: 0.4s;
   }
@@ -52,7 +52,7 @@ label.toggler {
     left: 4px;
     bottom: 4px;
     border-radius: 50%;
-    background-color: color("text");
+    background-color: var(--color-text);
     -webkit-transition: 0.4s;
     transition: 0.4s;
   }

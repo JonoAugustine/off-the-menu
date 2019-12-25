@@ -4,8 +4,8 @@ nav.navbar {
   padding: $padding;
   margin-bottom: $margin;
 
-  border-bottom: 1px solid color(primary);
-  background-color: lighten(color(base), 1%);
+  border-bottom: 1px solid var(--color-primary);
+  background-color: LIGHTEN(var(#{--color-base}), 1%);
 
   & > .container {
     display: flex;

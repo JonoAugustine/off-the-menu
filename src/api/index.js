@@ -14,4 +14,10 @@ const ThemeController = {
   }
 };
 
+const ProjectInfo = {
+  name: "Off The Menu",
+  slug: "otm",
+  version: "0.2.0"
+};
+
 export { ThemeController };

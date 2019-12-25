@@ -1,3 +1,5 @@
+@import "https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.2/dist/semantic.min.css";
+
 $breakpoints: (
   phone: 400px,
   phone-wide: 480px,
@@ -21,44 +23,27 @@ $breakpoints: (
   }
 }
 
-$light-theme: false;
+:root {
+  --color-primary: rgba(0, 166, 251, 1);
+  --color-secondary: rgba(36, 106, 115, 1);
+  --color-tertiary: rgba(37, 92, 153, 1);
+  --color-danger: rgba(167, 29, 49, 1);
+  --color-base: rgba(25, 23, 22, 1);
+  --color-text: rgba(253, 255, 252, 1);
+}
 
-$themes: (
-  "dark": (
-    "primary": rgba(0, 166, 251, 1),
-    "secondary": rgba(36, 106, 115, 1),
-    "tertiary": rgba(37, 92, 153, 1),
-    "danger": rgba(167, 29, 49, 1),
-    "base": rgba(25, 23, 22, 1),
-    "text": rgba(253, 255, 252, 1)
-  ),
-  "light": (
-    "primary": rgba(10, 211, 255, 1),
-    "secondary": rgba(28, 93, 153, 1),
-    "danger": rgba(167, 29, 49, 1),
-    "base": rgba(252, 255, 247, 1),
-    "text": rgba(15, 15, 15, 1)
-  )
-);
-
-@function color($color-name) {
-  @if $light-theme {
-    @return map-get(map-get($themes, "light"), $color-name);
-  } @else {
-    @return map-get(map-get($themes, "dark"), $color-name);
-  }
+:root[data-theme="light"] {
+  --color-primary: rgba(10, 211, 255, 1);
+  --color-secondary: rgba(28, 93, 153, 1);
+  --color-danger: rgba(167, 29, 49, 1);
+  --color-base: rgba(252, 255, 247, 1);
+  --color-text: rgba(15, 15, 15, 1);
 }
 
 $margin: 10px;
 $padding: 10px;
 
-@mixin css-triangle(
-  $color,
-  $direction,
-  $size: 6px,
-  $position: absolute,
-  $round: false
-) {
+@mixin css-triangle($color, $direction, $size: 6px, $position: absolute, $round: false) {
   @include pseudo($pos: $position);
   width: 0;
   height: 0;
